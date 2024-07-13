@@ -13,5 +13,25 @@
             "kmeans_clustering": 0.08637943267822265,
             "pandas_data_manipulation": 0.04550590515136719
         }
+    },
+    "WINDOWS-27U4420": {
+        "system_info": {
+            "processor": "x86_64",
+            "cpu_cores": 6,
+            "cpu_logical_processors": 12,
+            "ram": "31.23 GB",
+            "gpu_name": "Quadro T2000",
+            "gpu_capability": [
+                7,
+                5
+            ]
+        },
+        "performance": {
+            "cpu_matrix_multiplication": 0.17102546691894532,
+            "gpu_matrix_multiplication": 0.00012111663818359375,
+            "memory_operations": 0.5997705936431885,
+            "kmeans_clustering": 0.07887043952941894,
+            "pandas_data_manipulation": 0.032120800018310545
+        }
     }
 }
