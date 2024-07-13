@@ -1,5 +1,6 @@
 import json
 import platform
+import socket
 import time
 
 import numpy as np
@@ -7,10 +8,10 @@ import pandas as pd
 import psutil
 import torch
 from sklearn.cluster import KMeans
-import socket
+from sklearn.datasets import make_blobs
+
 from save_results import save_results
 
-from sklearn.datasets import make_blobs
 
 def gather_system_info():
     info = {
@@ -36,6 +37,7 @@ def cpu_matrix_multiplication(size, iterations=5):
         times.append(end_time - start_time)
     return sum(times) / len(times)
 
+
 def gpu_matrix_multiplication(size, iterations=5):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
@@ -53,6 +55,7 @@ def gpu_matrix_multiplication(size, iterations=5):
         times.append(end_time - start_time)
     return sum(times) / len(times)
 
+
 def memory_intensive_operations(size, iterations=5):
     times = []
     for _ in range(iterations):
@@ -63,6 +66,7 @@ def memory_intensive_operations(size, iterations=5):
         end_time = time.time()
         times.append(end_time - start_time)
     return sum(times) / len(times)
+
 
 def kmeans_clustering(n_samples=100000, n_features=10, n_clusters=5, iterations=5):
     data, _ = make_blobs(n_samples=n_samples, n_features=n_features, centers=n_clusters)
@@ -75,19 +79,18 @@ def kmeans_clustering(n_samples=100000, n_features=10, n_clusters=5, iterations=
         times.append(end_time - start_time)
     return sum(times) / len(times)
 
+
 def pandas_data_manipulation(n_rows=1000000, iterations=5):
     times = []
     for _ in range(iterations):
-        df = pd.DataFrame({
-            'A': np.random.randn(n_rows),
-            'B': np.random.rand(n_rows)
-        })
+        df = pd.DataFrame({"A": np.random.randn(n_rows), "B": np.random.rand(n_rows)})
         start_time = time.time()
-        df['C'] = df['A'] + df['B']
-        result = df.groupby(pd.cut(df['C'], bins=10)).size()
+        df["C"] = df["A"] + df["B"]
+        result = df.groupby(pd.cut(df["C"], bins=10)).size()
         end_time = time.time()
         times.append(end_time - start_time)
     return sum(times) / len(times)
+
 
 if __name__ == "__main__":
     system_name = socket.gethostname()
@@ -111,16 +114,18 @@ if __name__ == "__main__":
 
     # System info and results
     system_info = gather_system_info()
-    results = {system_name:{
-        "system_info": system_info,
-        "performance": {
-            "cpu_matrix_multiplication": cpu_duration,
-            "gpu_matrix_multiplication": gpu_duration,
-            "memory_operations": memory_duration,
-            "kmeans_clustering": clustering_time,
-            "pandas_data_manipulation": manipulation_time,
-        },
-    }}
+    results = {
+        system_name: {
+            "system_info": system_info,
+            "performance": {
+                "cpu_matrix_multiplication": cpu_duration,
+                "gpu_matrix_multiplication": gpu_duration,
+                "memory_operations": memory_duration,
+                "kmeans_clustering": clustering_time,
+                "pandas_data_manipulation": manipulation_time,
+            },
+        }
+    }
 
     save_results(results)
     print("Results saved to system_performance.json")
