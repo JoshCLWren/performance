@@ -1,22 +1,17 @@
 {
-    "WINDOWS-27U4420": {
+    "Josh.attlocal.net": {
         "system_info": {
-            "processor": "x86_64",
-            "cpu_cores": 6,
-            "cpu_logical_processors": 12,
-            "ram": "31.23 GB",
-            "gpu_name": "Quadro T2000",
-            "gpu_capability": [
-                7,
-                5
-            ]
+            "processor": "arm",
+            "cpu_cores": 8,
+            "cpu_logical_processors": 8,
+            "ram": "32.00 GB"
         },
         "performance": {
-            "cpu_matrix_multiplication": 0.11226439476013184,
-            "gpu_matrix_multiplication": 0.010360527038574218,
-            "memory_operations": 0.8075528144836426,
-            "kmeans_clustering": 0.1919701099395752,
-            "pandas_data_manipulation": 0.04409713745117187
+            "cpu_matrix_multiplication": 0.13310847282409669,
+            "gpu_matrix_multiplication": 0.03783860206604004,
+            "memory_operations": 1.2831255912780761,
+            "kmeans_clustering": 0.08637943267822265,
+            "pandas_data_manipulation": 0.04550590515136719
         }
     }
 }

@@ -9,7 +9,7 @@ import psutil
 import torch
 from sklearn.cluster import KMeans
 from sklearn.datasets import make_blobs
-
+from gpu import gpu_matrix_multiplication
 from save_results import save_results
 
 
@@ -38,22 +38,6 @@ def cpu_matrix_multiplication(size, iterations=5):
     return sum(times) / len(times)
 
 
-def gpu_matrix_multiplication(size, iterations=5):
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    print(f"Using device: {device}")
-    times = []
-    A = torch.rand(size, size, device=device)
-    B = torch.rand(size, size, device=device)
-    for _ in range(10):
-        _ = torch.matmul(A, B)
-    torch.cuda.synchronize()
-    for _ in range(iterations):
-        start_time = time.time()
-        C = torch.matmul(A, B)
-        torch.cuda.synchronize()
-        end_time = time.time()
-        times.append(end_time - start_time)
-    return sum(times) / len(times)
 
 
 def memory_intensive_operations(size, iterations=5):
